@@ -115,3 +115,11 @@ with tf.Session() as test:
     X = Conv2D(F1, (1, 1), strides = (s,s), name = conv_name_base + '2a', kernel_initializer = glorot_uniform(seed=0))(X)
     X = BatchNormalization(axis = 3, name = bn_name_base + '2a')(X)
     X = Activation('relu')(X)
+
+    ### START CODE HERE ###
+
+    # Second component of main path (≈3 lines)
+    X = Conv2D(F2, (f, f), strides=(1, 1), padding='same', name=conv_name_base + '2b',
+               kernel_initializer=glorot_uniform(seed=0))(X)
+    X = BatchNormalization(axis=3, name=bn_name_base + '2b')(X)
+    X = Activation('relu')(X)
