@@ -123,3 +123,6 @@ with tf.Session() as test:
                kernel_initializer=glorot_uniform(seed=0))(X)
     X = BatchNormalization(axis=3, name=bn_name_base + '2b')(X)
     X = Activation('relu')(X)
+  # Third component of main path (≈2 lines)
+    X = Conv2D(F3, (1, 1), strides = (1,1), name = conv_name_base + '2c', kernel_initializer = glorot_uniform(seed=0))(X)
+    X = BatchNormalization(axis = 3, name = bn_name_base + '2c')(X)
