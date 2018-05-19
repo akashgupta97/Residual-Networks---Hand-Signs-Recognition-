@@ -126,3 +126,16 @@ with tf.Session() as test:
   # Third component of main path (≈2 lines)
     X = Conv2D(F3, (1, 1), strides = (1,1), name = conv_name_base + '2c', kernel_initializer = glorot_uniform(seed=0))(X)
     X = BatchNormalization(axis = 3, name = bn_name_base + '2c')(X)
+
+    ##### SHORTCUT PATH #### (≈2 lines)
+    X_shortcut = Conv2D(F3, (1, 1), strides=(s, s), name=conv_name_base + '1',
+                        kernel_initializer=glorot_uniform(seed=0))(X_shortcut)
+    X_shortcut = BatchNormalization(axis=3, name=bn_name_base + '1')(X_shortcut)
+
+    # Final step: Add shortcut value to main path, and pass it through a RELU activation (≈2 lines)
+    X = layers.Add()([X, X_shortcut])
+    X = Activation('relu')(X)
+
+    ### END CODE HERE ###
+
+    return X
