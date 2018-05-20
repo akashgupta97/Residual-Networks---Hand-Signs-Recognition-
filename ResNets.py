@@ -138,6 +138,7 @@ with tf.Session() as test:
 
     ### END CODE HERE ###
 
+<<<<<<< HEAD
     return X
 
 tf.reset_default_graph()
@@ -152,3 +153,6 @@ with tf.Session() as test:
     print("out = " + str(out[0][1][1][0]))
 
     
+=======
+    return X
+>>>>>>> 7bfdccf5d20f49923e510a9cf98c4fba847729b4
