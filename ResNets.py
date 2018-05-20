@@ -126,3 +126,29 @@ with tf.Session() as test:
   # Third component of main path (≈2 lines)
     X = Conv2D(F3, (1, 1), strides = (1,1), name = conv_name_base + '2c', kernel_initializer = glorot_uniform(seed=0))(X)
     X = BatchNormalization(axis = 3, name = bn_name_base + '2c')(X)
+
+    ##### SHORTCUT PATH #### (≈2 lines)
+    X_shortcut = Conv2D(F3, (1, 1), strides=(s, s), name=conv_name_base + '1',
+                        kernel_initializer=glorot_uniform(seed=0))(X_shortcut)
+    X_shortcut = BatchNormalization(axis=3, name=bn_name_base + '1')(X_shortcut)
+
+    # Final step: Add shortcut value to main path, and pass it through a RELU activation (≈2 lines)
+    X = layers.Add()([X, X_shortcut])
+    X = Activation('relu')(X)
+
+    ### END CODE HERE ###
+
+    return X
+
+tf.reset_default_graph()
+
+with tf.Session() as test:
+    np.random.seed(1)
+    A_prev = tf.placeholder("float", [3, 4, 4, 6])
+    X = np.random.randn(3, 4, 4, 6)
+    A = convolutional_block(A_prev, f = 2, filters = [2, 4, 6], stage = 1, block = 'a')
+    test.run(tf.global_variables_initializer())
+    out = test.run([A], feed_dict={A_prev: X, K.learning_phase(): 0})
+    print("out = " + str(out[0][1][1][0]))
+
+    
