@@ -209,3 +209,12 @@ def ResNet50(input_shape=(64, 64, 3), classes=6):
     X = convolutional_block(X, f=3, filters=[512, 512, 2048], stage=5, block='a', s=2)
     X = identity_block(X, 3, [512, 512, 2048], stage=5, block='b')
     X = identity_block(X, 3, [512, 512, 2048], stage=5, block='c')
+
+    # AVGPOOL (≈1 line). Use "X = AveragePooling2D(...)(X)"
+    X = AveragePooling2D((2, 2), name='avg_pool')(X)
+
+    ### END CODE HERE ###
+
+    # output layer
+    X = Flatten()(X)
+    X = Dense(classes, activation='softmax', name='fc' + str(classes), kernel_initializer=glorot_uniform(seed=0))(X)
