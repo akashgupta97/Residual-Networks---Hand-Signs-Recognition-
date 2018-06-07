@@ -245,3 +245,7 @@ print ("X_train shape: " + str(X_train.shape))
 print ("Y_train shape: " + str(Y_train.shape))
 print ("X_test shape: " + str(X_test.shape))
 print ("Y_test shape: " + str(Y_test.shape))
+
+
+model.fit(X_train, Y_train, epochs = 2, batch_size = 32)
+
