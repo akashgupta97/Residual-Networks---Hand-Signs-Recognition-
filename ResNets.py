@@ -249,3 +249,7 @@ print ("Y_test shape: " + str(Y_test.shape))
 
 model.fit(X_train, Y_train, epochs = 2, batch_size = 32)
 
+preds = model.evaluate(X_test, Y_test)
+print ("Loss = " + str(preds[0]))
+print ("Test Accuracy = " + str(preds[1]))
+
