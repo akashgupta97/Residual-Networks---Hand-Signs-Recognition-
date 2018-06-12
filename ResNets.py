@@ -253,3 +253,8 @@ preds = model.evaluate(X_test, Y_test)
 print ("Loss = " + str(preds[0]))
 print ("Test Accuracy = " + str(preds[1]))
 
+model = load_model('ResNet50.h5')
+    
+preds = model.evaluate(X_test, Y_test)
+print ("Loss = " + str(preds[0]))
+print ("Test Accuracy = " + str(preds[1]))
