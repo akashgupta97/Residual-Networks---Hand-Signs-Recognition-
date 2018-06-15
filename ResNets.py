@@ -269,3 +269,5 @@ my_image = scipy.misc.imread(img_path)
 imshow(my_image)
 print("class prediction vector [p(0), p(1), p(2), p(3), p(4), p(5)] = ")
 print(model.predict(x))
+
+model.summary()
