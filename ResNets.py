@@ -651,3 +651,6 @@ Trainable params: 23,546,886
 Non-trainable params: 53,120
 ____________________________________________________________________________________________________
 '''
+
+plot_model(model, to_file='model.png')
+SVG(model_to_dot(model).create(prog='dot', format='svg'))
